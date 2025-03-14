@@ -1,0 +1,6 @@
+CREATE TABLE homeworks (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    done BOOLEAN NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    deadline DATE NOT NULL
+);
