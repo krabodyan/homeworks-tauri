@@ -51,7 +51,7 @@
   />
   <title>Homeworks</title>
 </svelte:head>
-<main class="w-full h-full bg-gray-950/97 overflow-y-auto">
+<main class="w-full h-full bg-gray-950/97 overflow-y-auto pb-10">
   <section class="flex flex-col gap-5 mx-auto max-w-2xl">
     <Filter bind:value={filter} />
     <NewTaskField />
