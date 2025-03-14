@@ -67,22 +67,3 @@
     <Modal bind:editMode close={() => (editMode = null)} />
   {/if}
 </main>
-
-<style lang="postcss">
-  @reference "tailwindcss";
-  :global(html),
-  :global(body) {
-    width: 100%;
-    height: 100%;
-  }
-  :global(html) {
-    color: theme(--color-white);
-    font-family: "Onest", "sans-serif";
-    font-weight: 400;
-    font-size: theme(--text-xl);
-  }
-  :global(input) {
-    outline: none;
-    appearance: none;
-  }
-</style>

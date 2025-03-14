@@ -54,7 +54,7 @@
     <EditIcon
       title="edit task"
       className="text-gray-600 transition hover:scale-105 p-1 hover:text-amber-200"
-      onclick={() => (editMode = editMode === task.id ? null : task.id)}
+      onclick={() => (editMode = task.id)}
     />
   </div>
 </article>

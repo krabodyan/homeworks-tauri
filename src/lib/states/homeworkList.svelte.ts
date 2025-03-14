@@ -26,6 +26,12 @@ export class HomeworkList {
     invoke("toggle_task", { id }).catch((err) => console.error(err));
   };
 
+  updateTask = (id: number, title: string, deadline: Date) => {
+    invoke("update_task", { id, title, deadline: parseDate(deadline) }).catch(
+      (err) => console.error(err),
+    );
+  };
+
   remove = (id: number) => {
     invoke("delete_task", { id })
       .then(() => {
