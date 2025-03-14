@@ -31,7 +31,7 @@
   <!-- svelte-ignore a11y_click_events_have_key_events -->
   <!-- svelte-ignore a11y_no_static_element_interactions -->
   <div
-    class="fixed inset-0 w-full h-full bg-gray-950/90 flex items-center justify-center z-50"
+    class="fixed inset-0 w-full h-full backdrop-blur-sm flex items-center justify-center z-50"
     onclick={() => close()}
   >
     <div
