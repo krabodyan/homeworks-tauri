@@ -23,6 +23,7 @@
     .catch((err: string) => console.log(err));
 
   let list = getHomeworkList();
+
   let editMode = $state<number | null>(null);
 
   let filter = $state<FilterType>("all");
@@ -50,7 +51,7 @@
   />
   <title>Homeworks</title>
 </svelte:head>
-<main class="w-full h-full bg-gray-950/97">
+<main class="w-full h-full bg-gray-950/97 overflow-y-auto">
   <section class="flex flex-col gap-5 mx-auto max-w-2xl">
     <Filter bind:value={filter} />
     <NewTaskField />
@@ -69,6 +70,11 @@
 
 <style lang="postcss">
   @reference "tailwindcss";
+  :global(html),
+  :global(body) {
+    width: 100%;
+    height: 100%;
+  }
   :global(html) {
     color: theme(--color-white);
     font-family: "Onest", "sans-serif";
