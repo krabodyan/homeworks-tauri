@@ -31,7 +31,7 @@
   <!-- svelte-ignore a11y_click_events_have_key_events -->
   <!-- svelte-ignore a11y_no_static_element_interactions -->
   <div
-    class="fixed inset-0 w-screen h-screen backdrop-blur-sm flex items-center justify-center z-50"
+    class="fixed br inset-0 w-screen h-screen flex items-center justify-center z-50"
     onclick={() => close()}
   >
     <div
@@ -61,3 +61,20 @@
     </div>
   </div>
 {/if}
+
+<style>
+  .br {
+    backdrop-filter: none;
+    filter: none;
+
+    --blur-size: 8px;
+    --blur: blur(var(--blur-size));
+
+    -webkit-filter: var(--blur); /* works */
+    -webkit-filter: blur(var(--blur-size)); /* works */
+
+    -webkit-backdrop-filter: blur(8px); /* works */
+    -webkit-backdrop-filter: var(--blur); /* dont work */
+    -webkit-backdrop-filter: blur(var(--blur-size)); /* dont work */
+  }
+</style>

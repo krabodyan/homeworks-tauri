@@ -24,6 +24,13 @@
 
   let list = getHomeworkList();
 
+  list.tasks.push({
+    id: 1,
+    deadline: new Date(),
+    done: false,
+    title: "test",
+  });
+
   let editMode = $state<number | null>(null);
 
   let filter = $state<FilterType>("all");
