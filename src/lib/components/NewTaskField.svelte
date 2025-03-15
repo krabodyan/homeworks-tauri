@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getHomeworkList } from "$lib/states/homeworkList.svelte";
+  import { getHomeworkList } from "$lib/states";
 
   let list = getHomeworkList();
   let title = $state("");

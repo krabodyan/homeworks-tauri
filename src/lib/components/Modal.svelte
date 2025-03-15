@@ -1,19 +1,13 @@
 <script lang="ts">
-  import { getHomeworkList } from "$lib/states/homeworkList.svelte";
+  import { getHomeworkList } from "$lib/states";
   import { parseDate } from "$lib/utils";
-  import InputGroup from "$lib/components/InputGroup.svelte";
-  import { stopPropagation } from "svelte/legacy";
+  import { InputGroup } from "$lib/components";
 
-  let {
-    editMode = $bindable(),
-    close,
-  }: {
-    editMode: number;
-    close: () => void;
-  } = $props();
+  type Props = { editMode: number; close: () => void };
+  let { editMode = $bindable(), close }: Props = $props();
 
-  let list = getHomeworkList();
-  let task = list.tasks.find((task) => task.id === editMode)!;
+  const list = getHomeworkList();
+  const task = list.tasks.find((task) => task.id === editMode)!;
 
   let title = $state(task.title);
   let deadline = $state(parseDate(task.deadline));
@@ -31,7 +25,7 @@
   <!-- svelte-ignore a11y_click_events_have_key_events -->
   <!-- svelte-ignore a11y_no_static_element_interactions -->
   <div
-    class="fixed br inset-0 w-screen h-screen flex items-center justify-center z-50"
+    class="fixed backdrop-blur-sm inset-0 w-screen h-screen flex justify-center items-center z-50"
     onclick={() => close()}
   >
     <div
@@ -61,20 +55,3 @@
     </div>
   </div>
 {/if}
-
-<style>
-  .br {
-    backdrop-filter: none;
-    filter: none;
-
-    --blur-size: 8px;
-    --blur: blur(var(--blur-size));
-
-    -webkit-filter: var(--blur); /* works */
-    -webkit-filter: blur(var(--blur-size)); /* works */
-
-    -webkit-backdrop-filter: blur(8px); /* works */
-    -webkit-backdrop-filter: var(--blur); /* dont work */
-    -webkit-backdrop-filter: blur(var(--blur-size)); /* dont work */
-  }
-</style>

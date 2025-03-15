@@ -1,10 +1,11 @@
 @import "tailwindcss";
 
-/* @layer utilities { */
-/* .backdrop-blur-sm { */
-/* -webkit-backdrop-filter: blur(8px) */
-/* } */
-/* } */
+@layer utilities {
+  .backdrop-blur-sm {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px)
+  }
+}
 
 @layer base {
 

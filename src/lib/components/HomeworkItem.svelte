@@ -1,17 +1,11 @@
 <script lang="ts">
   import type { Task } from "$lib/types";
-  import EditIcon from "$lib/icons/Edit.svelte";
-  import TrashIcon from "$lib/icons/Trash.svelte";
+  import { EditIcon, TrashIcon } from "$lib/icons";
   import { subtractDates } from "$lib/utils";
-  import { getHomeworkList } from "$lib/states/homeworkList.svelte";
+  import { getHomeworkList } from "$lib/states";
 
-  let {
-    task,
-    editMode = $bindable(),
-  }: {
-    task: Task;
-    editMode: number | null;
-  } = $props();
+  type Props = { task: Task; editMode: number | null };
+  let { task, editMode = $bindable() }: Props = $props();
 
   const list = getHomeworkList();
 </script>

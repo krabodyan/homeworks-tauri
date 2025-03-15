@@ -1,13 +1,7 @@
 <script lang="ts">
-  import Filter from "$lib/components/Filter.svelte";
-  import Modal from "$lib/components/Modal.svelte";
-  import HomeworkItem from "$lib/components/HomeworkItem.svelte";
-  import NewTaskField from "$lib/components/NewTaskField.svelte";
   import type { FilterType, Task } from "$lib/types";
-  import {
-    createHomeworkList,
-    getHomeworkList,
-  } from "$lib/states/homeworkList.svelte";
+  import { createHomeworkList, getHomeworkList } from "$lib/states";
+  import { NewTaskField, Filter, Modal, HomeworkItem } from "$lib/components";
   import { flip } from "svelte/animate";
   import { invoke } from "@tauri-apps/api/core";
 
@@ -23,13 +17,6 @@
     .catch((err: string) => console.log(err));
 
   let list = getHomeworkList();
-
-  list.tasks.push({
-    id: 1,
-    deadline: new Date(),
-    done: false,
-    title: "test",
-  });
 
   let editMode = $state<number | null>(null);
 
@@ -58,6 +45,7 @@
   />
   <title>Homeworks</title>
 </svelte:head>
+
 <main class="w-full h-full bg-gray-950/97 overflow-y-auto pb-10">
   <section class="flex flex-col gap-5 mx-auto max-w-2xl">
     <Filter bind:value={filter} />
