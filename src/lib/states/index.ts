@@ -1,1 +1,1 @@
-export { getHomeworkList, createHomeworkList } from "./homeworkList.svelte";
+export { getHomeworkList, createHomeworkList } from './homeworkList.svelte';

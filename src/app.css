@@ -11,20 +11,16 @@
 
   body,
   html {
-    width: 100%;
-    height: 100%;
+    @apply w-full h-full
   }
 
-  input {
-    outline: none;
-    appearance: none;
+  input, button {
+    @apply appearance-none outline-none
   }
 
   html {
-    color: theme(--color-white);
     font-family: "Onest", "sans-serif";
-    font-weight: 400;
-    font-size: theme(--text-xl);
+    @apply text-xl text-white
   }
 
   ::-webkit-scrollbar-thumb {
