@@ -29,6 +29,9 @@ jobs:
 
       - name: Rust chache
         uses: swatinem/rust-cache@v2
+        with:
+          cache-all-crates: true
+          cache-on-failure: true
 
       - name: prepare database
         working-directory: src-tauri
