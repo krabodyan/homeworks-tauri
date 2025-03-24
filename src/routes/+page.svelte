@@ -43,7 +43,6 @@
         href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap"
         rel="stylesheet"
     />
-    <title>Homeworks</title>
 </svelte:head>
 
 <main class="w-full h-full bg-gray-950/97 overflow-y-auto pb-10">
