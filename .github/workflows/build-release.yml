@@ -35,7 +35,7 @@ jobs:
             })
             return data.id
             
-  publish-tauri:
+  buils-tauri:
     permissions:
       contents: write
 
