@@ -11,7 +11,7 @@ jobs:
       contents: write
 
     env:
-      DATABASE_URL: sqlite://test.db
+      DATABASE_URL: sqlite://db.sqlite
 
     runs-on: windows-latest  
       
@@ -32,8 +32,8 @@ jobs:
 
       - name: prepare database
         run: |
-          cargo install sqlx-cli --no-default-features --features sqlite &&
-          cargo sqlx database create &&
+          cargo install sqlx-cli --no-default-features --features sqlite
+          cargo sqlx database create
           cargo sqlx migrate run
         
       - uses: tauri-apps/tauri-action@v0

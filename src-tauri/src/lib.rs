@@ -85,7 +85,7 @@ fn setup(app: &mut tauri::App) -> Result<(), Box<dyn std::error::Error>> {
 	if !path.exists() {
 		std::fs::create_dir(&path).expect("failed to create dir");
 	}
-	path.push("data.db");
+	path.push("db.sqlite");
 
 	let addr = format!(
 		"sqlite://{}",
