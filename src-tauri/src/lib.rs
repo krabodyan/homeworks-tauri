@@ -1,7 +1,9 @@
+use std::str::FromStr;
+
 use chrono::NaiveDate;
-use sqlx::migrate::MigrateDatabase;
 use sqlx::prelude::FromRow;
-use sqlx::{Sqlite, SqlitePool};
+use sqlx::sqlite::SqliteConnectOptions;
+use sqlx::SqlitePool;
 use tauri::async_runtime::Mutex;
 use tauri::{Manager, State};
 
@@ -91,21 +93,16 @@ fn setup(app: &mut tauri::App) -> Result<(), Box<dyn std::error::Error>> {
 		"sqlite://{}",
 		path.to_str().expect("path should be something")
 	);
+	let opts = SqliteConnectOptions::from_str(&addr)?.create_if_missing(true);
 
 	let pool = tauri::async_runtime::block_on(async move {
-		Sqlite::create_database(&addr)
-			.await
-			.expect("failed to create database");
-
-		let pool = sqlx::SqlitePool::connect(&addr)
+		let pool = sqlx::SqlitePool::connect_with(opts)
 			.await
 			.expect("failed to connect");
-
 		sqlx::migrate!("./migrations")
 			.run(&pool)
 			.await
 			.expect("failed to migrate");
-
 		pool
 	});
 	app.manage(Mutex::new(pool));

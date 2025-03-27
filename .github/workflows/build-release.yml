@@ -11,6 +11,7 @@ jobs:
       contents: write
 
     env:
+      SQLX_OFFLINE: true
       DATABASE_URL: sqlite://db.sqlite
 
     runs-on: windows-latest  
@@ -32,19 +33,12 @@ jobs:
         with:
           cache-all-crates: true
           cache-on-failure: true
-
-      - name: prepare database
-        working-directory: src-tauri
-        run: |
-          cargo install sqlx-cli --no-default-features --features sqlite
-          cargo sqlx database create
-          cargo sqlx migrate run
-        
+       
       - uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tagName: app-v__VERSION__
-          releaseName: 'App v__VERSION__'
+          tagName: app-${{ github.sha }}
+          releaseName: 'App ${{ github.sha }}'
           releaseDraft: false
           prerelease: false
