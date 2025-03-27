@@ -91,6 +91,7 @@ fn setup(app: &mut tauri::App) -> Result<(), Box<dyn std::error::Error>> {
 		"sqlite://{}",
 		path.to_str().expect("path should be something")
 	);
+
 	let pool = tauri::async_runtime::block_on(async move {
 		Sqlite::create_database(&addr)
 			.await

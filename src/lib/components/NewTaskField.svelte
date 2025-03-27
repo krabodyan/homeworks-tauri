@@ -16,7 +16,7 @@
         required
         type="text"
         bind:value={title}
-        class="w-full bg-gray-800/30 rounded-md p-2 sm:p-3 border-2 border-gray-800 focus:border-sky-600"
+        class="w-full bg-gray-800/30 rounded-md p-2 text-xs sm:text-sm sm:p-3 border-2 border-gray-800 focus:border-sky-600"
     />
     <button
         type="submit"
