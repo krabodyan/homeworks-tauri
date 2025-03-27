@@ -18,7 +18,6 @@ jobs:
       
     steps:
       - uses: actions/checkout@v4
-      - run: rustup toolchain install stable --profile minimal
 
       - name: setup node
         uses: actions/setup-node@v4
@@ -27,12 +26,6 @@ jobs:
 
       - name: install frontend dependencies
         run: npm install
-
-      - name: Rust chache
-        uses: swatinem/rust-cache@v2
-        with:
-          cache-all-crates: true
-          cache-on-failure: true
        
       - uses: tauri-apps/tauri-action@v0
         env:
