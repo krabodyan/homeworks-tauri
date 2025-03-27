@@ -26,12 +26,18 @@ jobs:
 
       - name: install frontend dependencies
         run: npm install
+
+      - name: Set short git commit SHA
+        id: vars
+        run: |
+          calculatedSha=$(git rev-parse --short ${{ github.sha }})
+          echo "COMMIT_SHORT_SHA=$calculatedSha" >> $GITHUB_ENV
        
       - uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tagName: app-${{ github.sha }}
-          releaseName: 'App ${{ github.sha }}'
+          tagName: app-${{ env.COMMIT_SHORT_SHA }}
+          releaseName: 'App release ${{ env.COMMIT_SHORT_SHA }}'
           releaseDraft: false
           prerelease: false
