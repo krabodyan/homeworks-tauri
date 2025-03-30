@@ -10,12 +10,12 @@
     let list = getHomeworkList();
 
     onMount(() => {
-        invoke('load')
+        invoke<Task[]>('load')
             .then((tasks) => {
-                for (const task of tasks as Task[]) {
-                    task.deadline = new Date(task.deadline);
-                    list.tasks.push(task);
-                }
+                list.tasks = tasks.map((task) => ({
+                    ...task,
+                    deadline: new Date(task.deadline)
+                }));
             })
             .catch((err: string) => console.log(err));
     });
