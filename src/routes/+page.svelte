@@ -4,19 +4,21 @@
     import { NewTaskField, Filter, Modal, HomeworkItem } from '$lib/components';
     import { flip } from 'svelte/animate';
     import { invoke } from '@tauri-apps/api/core';
+    import { onMount } from 'svelte';
 
     createHomeworkList();
-
-    invoke('load')
-        .then((tasks) => {
-            for (const task of tasks as Task[]) {
-                task.deadline = new Date(task.deadline);
-                list.tasks.push(task);
-            }
-        })
-        .catch((err: string) => console.log(err));
-
     let list = getHomeworkList();
+
+    onMount(() => {
+        invoke('load')
+            .then((tasks) => {
+                for (const task of tasks as Task[]) {
+                    task.deadline = new Date(task.deadline);
+                    list.tasks.push(task);
+                }
+            })
+            .catch((err: string) => console.log(err));
+    });
 
     let editMode = $state<number | null>(null);
 
