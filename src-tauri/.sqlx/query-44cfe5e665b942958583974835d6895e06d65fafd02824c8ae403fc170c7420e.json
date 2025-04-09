@@ -1,0 +1,12 @@
+{
+  "db_name": "SQLite",
+  "query": "\n\t\tUPDATE homeworks\n\t\tSET title = $1, deadline = $2\n\t\tWHERE id = $3\n\t\t",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Right": 3
+    },
+    "nullable": []
+  },
+  "hash": "44cfe5e665b942958583974835d6895e06d65fafd02824c8ae403fc170c7420e"
+}

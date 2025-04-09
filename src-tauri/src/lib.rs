@@ -19,10 +19,15 @@ struct Task {
 async fn load(
 	state: State<'_, Mutex<SqlitePool>>,
 ) -> Result<Vec<Task>, String> {
-	sqlx::query_as!(Task, "SELECT * FROM homeworks")
-		.fetch_all(&*state.lock().await)
-		.await
-		.map_err(|err| err.to_string())
+	sqlx::query_as!(
+		Task,
+		r#"
+		SELECT * FROM homeworks
+		"#
+	)
+	.fetch_all(&*state.lock().await)
+	.await
+	.map_err(|err| err.to_string())
 }
 
 #[tauri::command]
@@ -31,9 +36,19 @@ async fn add_task(
 	state: State<'_, Mutex<SqlitePool>>,
 ) -> Result<i64, String> {
 	let now = chrono::Local::now().date_naive();
-	sqlx::query_scalar!("INSERT INTO homeworks (done, title, deadline) VALUES ($1, $2, $3) RETURNING id", false, title, now)
-		.fetch_one(&*state.lock().await)
-		.await.map_err(|err| err.to_string())
+	sqlx::query_scalar!(
+		r#"
+		INSERT INTO homeworks (done, title, deadline)
+		VALUES ($1, $2, $3)
+		RETURNING id
+		"#,
+		false,
+		title,
+		now
+	)
+	.fetch_one(&*state.lock().await)
+	.await
+	.map_err(|err| err.to_string())
 }
 
 #[tauri::command]
@@ -41,10 +56,16 @@ async fn delete_task(
 	id: i64,
 	state: State<'_, Mutex<SqlitePool>>,
 ) -> Result<(), String> {
-	sqlx::query!("DELETE FROM homeworks WHERE id = $1", id)
-		.execute(&*state.lock().await)
-		.await
-		.map_err(|e| e.to_string())?;
+	sqlx::query!(
+		r#"
+		DELETE FROM homeworks
+		WHERE id = $1
+		"#,
+		id
+	)
+	.execute(&*state.lock().await)
+	.await
+	.map_err(|e| e.to_string())?;
 	Ok(())
 }
 
@@ -56,7 +77,11 @@ async fn update_task(
 	state: State<'_, Mutex<SqlitePool>>,
 ) -> Result<(), String> {
 	sqlx::query!(
-		"UPDATE homeworks SET title = $1, deadline = $2 WHERE id = $3",
+		r#"
+		UPDATE homeworks
+		SET title = $1, deadline = $2
+		WHERE id = $3
+		"#,
 		title,
 		deadline,
 		id
@@ -73,7 +98,11 @@ async fn toggle_task(
 	state: State<'_, Mutex<SqlitePool>>,
 ) -> Result<(), String> {
 	sqlx::query!(
-		"UPDATE homeworks SET done = NOT done WHERE id = $1",
+		r#"
+		UPDATE homeworks
+		SET done = NOT done
+		WHERE id = $1
+		"#,
 		id
 	)
 	.execute(&*state.lock().await)
@@ -99,12 +128,15 @@ fn setup(app: &mut tauri::App) -> Result<(), Box<dyn std::error::Error>> {
 		let pool = sqlx::SqlitePool::connect_with(opts)
 			.await
 			.expect("failed to connect");
+
 		sqlx::migrate!("./migrations")
 			.run(&pool)
 			.await
 			.expect("failed to migrate");
+
 		pool
 	});
+
 	app.manage(Mutex::new(pool));
 	Ok(())
 }

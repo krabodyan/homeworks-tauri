@@ -1,6 +1,6 @@
 {
   "db_name": "SQLite",
-  "query": "INSERT INTO homeworks (done, title, deadline) VALUES ($1, $2, $3) RETURNING id",
+  "query": "\n\t\tINSERT INTO homeworks (done, title, deadline)\n\t\tVALUES ($1, $2, $3)\n\t\tRETURNING id\n\t\t",
   "describe": {
     "columns": [
       {
@@ -16,5 +16,5 @@
       false
     ]
   },
-  "hash": "7b23883eab30c3cb2236948f6255ca55b8daa2c9b26d71d3d1a52651ab38882b"
+  "hash": "ebc8395d8d6cfd7a4c59e4e9097c8157c9ec97a2906b9196dae2f45150d6f850"
 }

@@ -1,6 +1,6 @@
 {
   "db_name": "SQLite",
-  "query": "SELECT * FROM homeworks",
+  "query": "\n\t\tSELECT * FROM homeworks\n\t\t",
   "describe": {
     "columns": [
       {
@@ -34,5 +34,5 @@
       false
     ]
   },
-  "hash": "6172d17b263f6cef5d65db88c7a39050d20af635025d1a8deafabfc3d554cb26"
+  "hash": "c94761f0000789cfd70cb720139ccbae6cd6674e084fccc96d3daccdf1029c44"
 }
