@@ -1,0 +1,12 @@
+{
+  "db_name": "SQLite",
+  "query": "\n\t\tDELETE FROM homeworks\n\t\tWHERE id = $1\n\t\t",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Right": 1
+    },
+    "nullable": []
+  },
+  "hash": "a31dc54a1f25d5bef5ef015499f0c7104ac2f987140809d0579bc08ba050bd42"
+}

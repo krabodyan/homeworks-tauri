@@ -1,0 +1,42 @@
+name: 'publish'
+
+on:
+    push:
+        branches:
+            - master
+
+jobs:
+    build-tauri:
+        permissions:
+            contents: write
+
+        env:
+            SQLX_OFFLINE: true
+            DATABASE_URL: sqlite://db.sqlite
+
+        runs-on: windows-latest
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: setup node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: lts/*
+
+            - name: install frontend dependencies
+              run: npm install
+
+            - name: Set short git commit SHA
+              id: vars
+              shell: bash
+              run: echo "COMMIT_SHORT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
+            - uses: tauri-apps/tauri-action@v0
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  tagName: app-${{ env.COMMIT_SHORT_SHA }}
+                  releaseName: 'app-${{ env.COMMIT_SHORT_SHA }}'
+                  releaseDraft: false
+                  prerelease: false

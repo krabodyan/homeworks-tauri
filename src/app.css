@@ -1,1 +1,37 @@
 @import "tailwindcss";
+
+@layer utilities {
+  .backdrop-blur-sm {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px)
+  }
+}
+
+@layer base {
+
+  body,
+  html {
+    @apply w-full h-full
+  }
+
+  input, button {
+    @apply appearance-none outline-none
+  }
+
+  html {
+    font-family: "Onest", "sans-serif";
+    @apply text-xl text-white
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-transparent shadow-sm
+  }
+
+  ::-webkit-scrollbar {
+    @apply w-1 bg-transparent
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-md bg-gray-700/50
+  }
+}

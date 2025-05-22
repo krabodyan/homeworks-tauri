@@ -1,0 +1,20 @@
+{
+  "db_name": "SQLite",
+  "query": "\n\t\tINSERT INTO homeworks (done, title, deadline)\n\t\tVALUES ($1, $2, $3)\n\t\tRETURNING id\n\t\t",
+  "describe": {
+    "columns": [
+      {
+        "name": "id",
+        "ordinal": 0,
+        "type_info": "Integer"
+      }
+    ],
+    "parameters": {
+      "Right": 3
+    },
+    "nullable": [
+      false
+    ]
+  },
+  "hash": "ebc8395d8d6cfd7a4c59e4e9097c8157c9ec97a2906b9196dae2f45150d6f850"
+}
